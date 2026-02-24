@@ -8,7 +8,12 @@ export default function Contact() {
         <p className={styles.subtitle}>
           Me gusta colaborar en proyectos digitales donde el diseño y la tecnología van de la mano.
         </p>
-        <a href="mailto:carolina@example.com" className={styles.btnContactar}>
+        <a
+          href="https://w.app/gtadsb"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.btnContactar}
+        >
           Contactar
         </a>
       </div>
