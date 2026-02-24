@@ -1,0 +1,96 @@
+/* ══════════════════════════════════════════
+   SECCIÓN SERVICIOS
+══════════════════════════════════════════ */
+.section {
+    background-color: var(--color-dark);
+    padding: clamp(36px, 4vw, 56px) clamp(12px, 3vw, 40px);
+}
+
+.inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(36px, 5vw, 56px);
+}
+
+/* ── Título de sección ── */
+.sectionTitle {
+    font-size: var(--text-h3);
+    font-weight: var(--fw-semibold);
+    color: var(--color-secondary);
+    letter-spacing: 0.02em;
+}
+
+/* ── Grid de tarjetas ── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 2.5vw, 28px);
+}
+
+/* ── Tarjeta ── */
+.card {
+    background-color: var(--color-secondary);
+    border-radius: 16px;
+    padding: clamp(24px, 3vw, 36px) clamp(20px, 2.5vw, 28px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Ícono circular ── */
+.iconWrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-dark);
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.iconWrap svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* ── Título de tarjeta ── */
+.cardTitle {
+    font-size: var(--text-h5);
+    font-weight: var(--fw-semibold);
+    color: var(--color-primary);
+    line-height: var(--lh-snug);
+    text-align: center;
+}
+
+/* ── Descripción ── */
+.cardDesc {
+    font-size: var(--text-small);
+    font-weight: var(--fw-regular);
+    color: var(--color-dark);
+    line-height: var(--lh-loose);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
