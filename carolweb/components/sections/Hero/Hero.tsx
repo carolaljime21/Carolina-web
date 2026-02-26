@@ -1,10 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styles from './Hero.module.css';
-import { showComingSoon } from '@/components/Toast/Toast';
+import { showComingSoon } from '@/components/ui/Toast/Toast';
 
 export default function Hero() {
+  const router = useRouter();
   return (
     <section id="inicio" className={styles.hero}>
 
@@ -58,7 +60,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <button onClick={showComingSoon} className={styles.btnPrimary}>Más sobre mí</button>
+        <button onClick={() => router.push('/sobre-mi')} className={styles.btnPrimary}>Más sobre mí</button>
       </div>
 
     </section>

@@ -1,0 +1,164 @@
+/* ══════════════════════════════════════════
+   PÁGINA SOBRE MÍ
+══════════════════════════════════════════ */
+.page {
+    background-color: var(--color-dark);
+    min-height: 100vh;
+    padding-top: 76px;
+    /* altura del header fijo */
+}
+
+/* ── Bloque genérico ── */
+.block {
+    padding: clamp(56px, 8vw, 96px) clamp(12px, 3vw, 40px);
+}
+
+.blockInner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 6vw, 80px);
+}
+
+/* ── Lado izquierdo por defecto ── */
+.textSide {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 32px);
+}
+
+/* ── Bloque invertido (texto alineado a la derecha) ── */
+.blockReverse .blockInner {
+    justify-items: end;
+}
+
+.blockReverse .textSide {
+    align-items: flex-end;
+}
+
+/* ── Título del bloque ── */
+.blockTitle {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: var(--fw-bold);
+    color: var(--color-secondary);
+    line-height: var(--lh-snug);
+    letter-spacing: 0.01em;
+}
+
+.titleRight {
+    text-align: right;
+}
+
+/* ── Cuerpo de texto ── */
+.textBody {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.textBody p {
+    font-size: var(--text-body);
+    font-weight: var(--fw-regular);
+    color: rgba(251, 245, 229, 0.78);
+    line-height: var(--lh-loose);
+}
+
+.textRight p {
+    text-align: right;
+}
+
+/* ── Separador ── */
+.divider {
+    border: none;
+    border-top: 1px solid rgba(251, 245, 229, 0.08);
+    margin: 0 clamp(12px, 3vw, 40px);
+}
+
+/* ══════════════════════════════════════════
+   BLOQUE CON IMAGEN (bloque 2)
+══════════════════════════════════════════ */
+.blockWithImage .blockInner {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+/* Imagen a la izquierda: columna auto primero */
+.blockImageLeft .blockInner {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
+.imageSide {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.illustration {
+    width: 400px;
+    height: 300px;
+    object-fit: contain;
+    opacity: 0.92;
+    flex-shrink: 0;
+}
+
+.textSideRight {
+    align-items: flex-end;
+}
+
+
+/* ══════════════════════════════════════════
+   ICONOS DE TECNOLOGÍAS (bloque 1)
+══════════════════════════════════════════ */
+.blockInner:has(.iconsSide) {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.iconsSide {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* Todos los bloques pasan a 1 columna */
+    .blockInner,
+    .blockWithImage .blockInner,
+    .blockInner:has(.iconsSide) {
+        grid-template-columns: 1fr;
+    }
+
+    /* Texto siempre primero */
+    .textSide,
+    .textSideRight {
+        order: 1;
+        align-items: flex-start;
+        max-width: 100%;
+    }
+
+    /* Imagen siempre debajo */
+    .imageSide,
+    .iconsSide {
+        order: 2;
+        justify-content: center;
+    }
+
+    /* Ilustración adaptada a mobile */
+    .illustration {
+        width: 100%;
+        max-width: 340px;
+        height: auto;
+    }
+
+    /* Reset alineaciones de texto */
+    .titleRight,
+    .textRight p {
+        text-align: left;
+    }
+}

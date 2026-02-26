@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
-import Header from "@/components/Header/Header";
-import Toast from "@/components/Toast/Toast";
+import LoadingScreen from "@/components/ui/LoadingScreen/LoadingScreen";
+import Header from "@/components/ui/Header/Header";
+import Toast from "@/components/ui/Toast/Toast";
+
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",

@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Projects.module.css';
-import { showComingSoon } from '@/components/Toast/Toast';
+import { showComingSoon } from '@/components/ui/Toast/Toast';
 
 const projects = [
   {
