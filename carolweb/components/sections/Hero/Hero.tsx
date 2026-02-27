@@ -22,7 +22,7 @@ export default function Hero() {
             web y móviles con un enfoque en experiencia de usuario, funcionalidad y estética.
           </p>
           <div className={styles.buttons}>
-            <button onClick={showComingSoon} className={styles.btnPrimary}>Ver proyectos</button>
+            <button onClick={() => router.push('/proyectos')} className={styles.btnPrimary}>Ver proyectos</button>
             <a href="#contacto" className={styles.btnSecondary}>Contáctame</a>
           </div>
         </div>

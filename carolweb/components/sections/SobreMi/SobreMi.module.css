@@ -8,6 +8,40 @@
     /* altura del header fijo */
 }
 
+/* ── Encabezado Principal ── */
+.header {
+    text-align: center;
+    padding: clamp(48px, 7vw, 80px) clamp(12px, 3vw, 40px) 0;
+}
+
+.title {
+    font-size: var(--text-h2);
+    font-weight: var(--fw-bold);
+    color: var(--color-secondary);
+    letter-spacing: 0.01em;
+}
+
+.experienceBtn {
+    display: inline-flex;
+    align-self: center;
+    margin-top: 16px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    background-color: rgba(200, 144, 167, 0.15);
+    /* primary con opacidad */
+    color: var(--color-primary);
+    font-size: var(--text-small);
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    border: 1px solid rgba(200, 144, 167, 0.3);
+}
+
+.experienceBtn:hover {
+    background-color: rgba(200, 144, 167, 0.25);
+    transform: translateY(-2px);
+}
+
 /* ── Bloque genérico ── */
 .block {
     padding: clamp(56px, 8vw, 96px) clamp(12px, 3vw, 40px);
@@ -160,5 +194,235 @@
     .titleRight,
     .textRight p {
         text-align: left;
+    }
+}
+
+/* ══════════════════════════════════════════
+   NUEVAS SECCIONES: EXPERIENCIA Y HABILIDADES
+══════════════════════════════════════════ */
+.experienceSection,
+.skillsSection {
+    padding: clamp(56px, 8vw, 96px) clamp(12px, 3vw, 40px);
+}
+
+.sectionHeading {
+    font-size: var(--text-h2);
+    font-weight: var(--fw-bold);
+    color: var(--color-secondary);
+    text-align: center;
+    margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+/* ── Timeline (Experiencia Premium) ── */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    /* margin: 0 auto; Lo quitamos para no centrar cajas menores sino extenderlo 100% (1200px) */
+    position: relative;
+    padding-left: clamp(32px, 5vw, 56px);
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    /* Línea de tiempo al inicio del padding */
+    top: 8px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--color-primary) 0%, rgba(200, 144, 167, 0.1) 80%, transparent 100%);
+    border-radius: 4px;
+}
+
+.timelineItem {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 40px;
+    background: linear-gradient(135deg, rgba(251, 245, 229, 0.04) 0%, rgba(251, 245, 229, 0.01) 100%);
+    border: 1px solid rgba(251, 245, 229, 0.08);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* El punto iluminado de la línea de tiempo */
+.timelineItem::before {
+    content: '';
+    position: absolute;
+    left: calc(clamp(32px, 5vw, 56px) * -1 + 2px);
+    /* alinea con la línea que está en 8px */
+    top: 40px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--color-dark);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 12px rgba(200, 144, 167, 0.6);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.timelineItem:hover {
+    transform: translateY(-6px);
+    border-color: rgba(200, 144, 167, 0.4);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.timelineItem:hover::before {
+    background-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(200, 144, 167, 0.9);
+    transform: scale(1.2);
+}
+
+/* Badge de fecha */
+.timelineDate {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 6px 16px;
+    background-color: rgba(200, 144, 167, 0.15);
+    color: var(--color-primary);
+    border-radius: 50px;
+    font-size: var(--text-small);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(200, 144, 167, 0.3);
+    margin-bottom: 8px;
+}
+
+.timelineContent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.jobTitle {
+    font-size: var(--text-h3);
+    font-weight: var(--fw-bold);
+    color: var(--color-secondary);
+    letter-spacing: 0.01em;
+}
+
+.jobRole {
+    font-size: var(--text-h5);
+    font-weight: var(--fw-semibold);
+    color: rgba(251, 245, 229, 0.75);
+}
+
+.timelineContent p {
+    font-size: var(--text-body);
+    line-height: var(--lh-loose);
+    color: rgba(251, 245, 229, 0.65);
+    margin-top: 12px;
+}
+
+/* ── Habilidades (Grid Premium) ── */
+.skillsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skillTag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px 24px;
+    background: linear-gradient(135deg, rgba(251, 245, 229, 0.04) 0%, rgba(251, 245, 229, 0.01) 100%);
+    color: var(--color-secondary);
+    border: 1px solid rgba(251, 245, 229, 0.08);
+    border-radius: 20px;
+    font-size: var(--text-h5);
+    font-weight: var(--fw-medium);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    cursor: default;
+}
+
+.skillTag:hover {
+    border-color: rgba(200, 144, 167, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, rgba(251, 245, 229, 0.06) 0%, rgba(200, 144, 167, 0.06) 100%);
+}
+
+/* Responsive Extra */
+@media (max-width: 900px) {
+    .skillsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .skillsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .skillTag {
+        padding: 24px 16px;
+        font-size: var(--text-body);
+    }
+
+    .timeline {
+        gap: 32px;
+    }
+}
+
+@media (max-width: 560px) {
+
+    .experienceSection,
+    .skillsSection {
+        padding: clamp(40px, 6vw, 64px) clamp(12px, 3vw, 24px);
+    }
+
+    .timeline {
+        padding-left: 28px;
+        gap: 24px;
+    }
+
+    .timeline::before {
+        left: 4px;
+    }
+
+    .timelineItem::before {
+        left: calc(-28px + -2px);
+        /* centramos sobre la línea en 4px */
+        width: 12px;
+        height: 12px;
+        top: 24px;
+    }
+
+    .timelineItem {
+        padding: 20px 24px;
+        gap: 12px;
+    }
+
+    .jobTitle {
+        font-size: var(--text-h4);
+    }
+
+    .timelineDate {
+        font-size: 0.8rem;
+        padding: 4px 12px;
+    }
+
+    .skillsGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .skillTag {
+        padding: 20px 16px;
+        font-size: var(--text-body);
     }
 }

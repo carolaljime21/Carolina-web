@@ -7,7 +7,7 @@ import styles from './Header.module.css';
 const navLinks = [
   { label: 'Inicio',     href: '/#inicio',    anchor: '#inicio' },
   { label: 'Sobre mí',  href: '/sobre-mi',   anchor: null },
-  { label: 'Proyectos', href: '/#proyectos', anchor: '#proyectos' },
+  { label: 'Proyectos', href: '/proyectos', anchor: null },
   { label: 'Contacto',  href: '/#contacto',  anchor: '#contacto' },
 ];
 
@@ -25,6 +25,7 @@ export default function Header() {
 
   const getActive = () => {
     if (pathname === '/sobre-mi') return 'Sobre mí';
+    if (pathname === '/proyectos') return 'Proyectos';
     return sectionActive;
   };
 
