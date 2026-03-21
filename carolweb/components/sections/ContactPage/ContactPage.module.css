@@ -1,0 +1,105 @@
+/* ══════════════════════════════════════════
+   PÁGINA DE CONTACTO
+══════════════════════════════════════════ */
+.page {
+    min-height: 100vh;
+    background-color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(48px, 7vw, 80px) clamp(24px, 6vw, 80px);
+}
+
+.inner {
+    max-width: 640px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 24px);
+    text-align: center;
+}
+
+/* ── Título ── */
+.title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: var(--fw-bold);
+    color: var(--color-secondary);
+    line-height: var(--lh-snug);
+    letter-spacing: 0.01em;
+}
+
+/* ── Subtítulo ── */
+.subtitle {
+    font-size: var(--text-small);
+    font-weight: var(--fw-regular);
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+    max-width: 440px;
+}
+
+/* ── Botón WhatsApp ── */
+.btnWhatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    border-radius: 50px;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    font-size: var(--text-small);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btnWhatsapp:hover {
+    opacity: 0.88;
+    transform: translateY(-2px);
+    color: var(--color-dark);
+}
+
+/* ── Texto "También puedes..." ── */
+.alsoFind {
+    font-size: var(--text-small);
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 8px;
+}
+
+/* ── Lista de redes ── */
+.socialList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+/* ── Item de red social ── */
+.socialItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: var(--text-small);
+    font-weight: var(--fw-regular);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.socialItem:hover {
+    color: var(--color-primary);
+    transform: translateX(4px);
+}
+
+.socialItem svg {
+    flex-shrink: 0;
+    color: var(--color-secondary);
+    transition: color 0.2s ease;
+}
+
+.socialItem:hover svg {
+    color: var(--color-primary);
+}

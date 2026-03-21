@@ -47,6 +47,8 @@
     border-radius: 16px;
     background-color: var(--color-secondary);
     flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 /* ── Info ── */

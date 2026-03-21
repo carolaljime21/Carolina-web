@@ -16,7 +16,7 @@ export default function Hero() {
         <div className={styles.content}>
           <h1 className={styles.title}>
             Creo experiencias digitales donde el diseño y la tecnología se encuentran.
-          </h1>
+          </h1> 
           <p className={styles.subtitle}>
             Soy Carolina, ingeniera en Ciencias de la Computación. Desarrollo proyectos
             web y móviles con un enfoque en experiencia de usuario, funcionalidad y estética.

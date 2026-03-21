@@ -10,7 +10,7 @@ export default function Contact() {
         </p>
         <div className={styles.btnGroup}>
           <a
-            href="https://w.app/gtadsb"
+            href="https://wa.link/zsa95i"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btnContactar}

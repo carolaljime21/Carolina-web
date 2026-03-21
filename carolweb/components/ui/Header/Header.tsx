@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Inicio',     href: '/#inicio',    anchor: '#inicio' },
   { label: 'Sobre mí',  href: '/sobre-mi',   anchor: null },
   { label: 'Proyectos', href: '/proyectos', anchor: null },
-  { label: 'Contacto',  href: '/#contacto',  anchor: '#contacto' },
+  { label: 'Contacto',  href: '/contacto',   anchor: null },
 ];
 
 export default function Header() {
@@ -26,6 +26,7 @@ export default function Header() {
   const getActive = () => {
     if (pathname === '/sobre-mi') return 'Sobre mí';
     if (pathname === '/proyectos') return 'Proyectos';
+    if (pathname === '/contacto') return 'Contacto';
     return sectionActive;
   };
 
