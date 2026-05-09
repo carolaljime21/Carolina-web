@@ -1,7 +1,6 @@
 .page {
     background-color: var(--color-dark);
     min-height: 100vh;
-    padding-top: 76px;
     padding-left: clamp(12px, 3vw, 40px);
     padding-right: clamp(12px, 3vw, 40px);
     padding-bottom: clamp(48px, 7vw, 80px);

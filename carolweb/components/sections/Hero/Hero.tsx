@@ -22,7 +22,7 @@ export default function Hero() {
             web y móviles con un enfoque en experiencia de usuario, funcionalidad y estética.
           </p>
           <div className={styles.buttons}>
-            <button onClick={() => router.push('/proyectos')} className={styles.btnPrimary}>Ver proyectos</button>
+            <a href="#proyectos" className={styles.btnPrimary}>Ver proyectos</a>
             <a href="#contacto" className={styles.btnSecondary}>Contáctame</a>
           </div>
         </div>
@@ -38,29 +38,6 @@ export default function Hero() {
             priority
           />
         </div>
-      </div>
-
-      {/* ── Sobre mí ── */}
-      <div className={styles.sobreMi}>
-        {/* Título decorativo */}
-        <div className={styles.sobreTitulo}>
-          <span className={styles.lineaDeco} />
-          <h2>Sobre mí</h2>
-          <span className={styles.lineaDeco} />
-        </div>
-
-        {/* Textos */}
-        <div className={styles.sobreTextos}>
-          <p>
-            Me interesa crear soluciones digitales claras, funcionales y visualmente atractivas.<br />
-            Disfruto trabajar en proyectos donde el código no solo funcione, sino que también se sienta bien al usarlo.
-          </p>
-          <p>
-            Actualmente me enfoco en desarrollo web, móvil y proyectos digitales creativos.
-          </p>
-        </div>
-
-        <button onClick={() => router.push('/sobre-mi')} className={styles.btnPrimary}>Más sobre mí</button>
       </div>
 
     </section>

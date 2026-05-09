@@ -1,61 +1,86 @@
 'use client';
 
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { projectsData } from '@/data/projects';
 import styles from './Projects.module.css';
-import { showComingSoon } from '@/components/ui/Toast/Toast';
 
-const projects = [
-  {
-    id: 'transiloja',
-    title: 'TransiLoja',
-    description:
-      'Prototipo de aplicación orientada a la consulta de rutas, paradas y horarios del transporte público de la ciudad de Loja. El proyecto fue desarrollado con un enfoque centrado en el usuario, priorizando la claridad de la información y la usabilidad. Participé en el diseño UX/UI, desarrollo frontend y pruebas de calidad manuales, validando flujos, funcionalidades y consistencia visual para garantizar una experiencia intuitiva y confiable.',
-    image: '/transiLoja/logoTransiLoja.png',
-  },
-  {
-    id: 'medihelp',
-    title: 'MediHelp - Sistema Médico',
-    description:
-      'Sistema médico de Dashboard administrativo con gestión de citas, recetas, historiales clínicos + Aplicación móvil para pacientes con chatbot incluido junto a notificaciones y recordatorios.',
-    image: '/medihelp/medihelp-logo.png',
-  },
-];
+// Registramos ScrollTrigger para las animaciones
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Projects() {
-  const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const cards = containerRef.current.querySelectorAll(`.${styles.card}`);
+
+    cards.forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        { y: 30, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 90%',
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: 'power2.out',
+          delay: i * 0.1,
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, []);
+
   return (
     <section id="proyectos" className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.sectionTitle}>Proyectos Destacados</h2>
+        <h2 className={styles.title}>Proyectos</h2>
+        <p className={styles.subtitle}>Una selección de mis proyectos más recientes</p>
 
-        <div className={styles.list}>
-          {projects.map(({ id, title, description, image }, i) => (
-            <div key={title}>
-              <article className={styles.projectRow}>
-                <div className={styles.imgBox} aria-label={`Preview de ${title}`}>
-                  {image && (
-                    <Image
-                      src={image}
-                      alt={`Preview de ${title}`}
-                      fill
-                      style={{ objectFit: 'contain', padding: '24px' }}
-                    />
-                  )}
+        <div className={styles.grid} ref={containerRef}>
+          {projectsData.map((project) => (
+            <div key={project.id} className={styles.card}>
+              <div className={styles.content}>
+                
+                <div className={styles.cardHeader}>
+                  <div>
+                    <h3 className={styles.projectTitle}>{project.title}</h3>
+                    <h4 className={styles.projectSubtitle}>{project.subtitle}</h4>
+                  </div>
+                  
+                  {project.id === 'transiloja' ? (
+                    <a href={project.href || "#"} target="_blank" rel="noopener noreferrer" className={styles.visitLink}>
+                      Ver en Drive ↗
+                    </a>
+                  ) : project.href ? (
+                    <a href={project.href} target="_blank" rel="noopener noreferrer" className={styles.visitLink}>
+                      Visitar web ↗
+                    </a>
+                  ) : null}
                 </div>
-                <div className={styles.info}>
-                  <h3 className={styles.projectTitle}>{title}</h3>
-                  <p className={styles.projectDesc}>{description}</p>
+
+                <p className={styles.projectDesc}>{project.description}</p>
+                
+                <div className={styles.tags}>
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className={styles.tag}>
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-                <button onClick={() => router.push(`/proyectos?id=${id}`)} className={styles.btnDetalle}>Ver Detalles</button>
-              </article>
-              {i < projects.length - 1 && <hr className={styles.divider} />}
+              </div>
             </div>
           ))}
-        </div>
-
-        <div className={styles.cta}>
-          <button onClick={() => router.push('/proyectos')} className={styles.btnMas}>Ver más proyectos</button>
         </div>
       </div>
     </section>

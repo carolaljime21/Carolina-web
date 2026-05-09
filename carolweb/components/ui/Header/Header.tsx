@@ -1,94 +1,88 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import { Home, Briefcase, Code, FolderOpen, Mail } from 'lucide-react';
+import gsap from 'gsap';
 import styles from './Header.module.css';
 
 const navLinks = [
-  { label: 'Inicio',     href: '/#inicio',    anchor: '#inicio' },
-  { label: 'Sobre mí',  href: '/sobre-mi',   anchor: null },
-  { label: 'Proyectos', href: '/proyectos', anchor: null },
-  { label: 'Contacto',  href: '/contacto',   anchor: null },
+  { label: 'Inicio', href: '#inicio', icon: Home },
+  { label: 'Experiencia', href: '#experiencia', icon: Briefcase },
+  { label: 'Habilidades', href: '#habilidades', icon: Code },
+  { label: 'Proyectos', href: '#proyectos', icon: FolderOpen },
+  { label: 'Contacto', href: '#contacto', icon: Mail },
 ];
 
 export default function Header() {
   const pathname = usePathname();
-  const router = useRouter();
   const [sectionActive, setSectionActive] = useState('Inicio');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
-  // Si el pathname cambia a /sobre-mi reseteamos sectionActive a 'Inicio'
-  // para que al volver a / quede correctamente en Inicio
   useEffect(() => {
-    if (pathname === '/') setSectionActive('Inicio');
-  }, [pathname]);
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current,
+        { x: -100, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
+      );
+    }
+  }, []);
 
-  const getActive = () => {
-    if (pathname === '/sobre-mi') return 'Sobre mí';
-    if (pathname === '/proyectos') return 'Proyectos';
-    if (pathname === '/contacto') return 'Contacto';
-    return sectionActive;
-  };
+  // Update active section based on intersection observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            const link = navLinks.find(l => l.href === `#${id}`);
+            if (link) setSectionActive(link.label);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    navLinks.forEach((link) => {
+      const id = link.href.substring(1);
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     label: string,
-    href: string,
-    anchor: string | null
+    href: string
   ) => {
     e.preventDefault();
-    setMenuOpen(false);
-
-    if (anchor) {
-      // Link de sección: navegar a / y luego hacer scroll
-      if (pathname !== '/') {
-        router.push('/');
-        // El scroll lo hará el navegador con el hash, usamos un timeout para esperar el render
-        setTimeout(() => {
-          const target = document.querySelector(anchor);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-      } else {
-        const target = document.querySelector(anchor);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      }
-      setSectionActive(label);
-    } else {
-      // Link de página (Sobre mí)
-      router.push(href);
-    }
+    const id = href.substring(1);
+    const target = document.getElementById(id);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    setSectionActive(label);
   };
 
-  const active = getActive();
-
   return (
-    <header className={styles.header}>
-      {/* ── Burger button (solo mobile) ── */}
-      <button
-        className={`${styles.burger} ${menuOpen ? styles.burgerOpen : ''}`}
-        onClick={() => setMenuOpen((o) => !o)}
-        aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-        aria-expanded={menuOpen}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
-
-      {/* ── Nav ── */}
-      <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ''}`}>
-        {navLinks.map(({ label, href, anchor }) => (
+    <header className={styles.header} ref={headerRef}>
+      <nav className={styles.nav}>
+        {navLinks.map(({ label, href, icon: Icon }) => (
           <a
             key={label}
             href={href}
-            className={`${styles.link} ${active === label ? styles.active : ''}`}
-            onClick={(e) => handleClick(e, label, href, anchor)}
+            className={`${styles.link} ${sectionActive === label ? styles.active : ''}`}
+            onClick={(e) => handleClick(e, label, href)}
+            title={label}
           >
-            {label}
+            <span className={styles.iconWrapper}>
+              <Icon size={24} strokeWidth={2} />
+            </span>
+            <span className={styles.label}>{label}</span>
           </a>
         ))}
       </nav>
     </header>
   );
 }
-

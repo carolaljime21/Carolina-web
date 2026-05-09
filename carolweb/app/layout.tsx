@@ -4,6 +4,7 @@ import "./globals.css";
 import LoadingScreen from "@/components/ui/LoadingScreen/LoadingScreen";
 import Header from "@/components/ui/Header/Header";
 import Toast from "@/components/ui/Toast/Toast";
+import LenisProvider from "@/components/ui/LenisProvider/LenisProvider";
 
 
 const montserrat = Montserrat({
@@ -26,10 +27,15 @@ export default function RootLayout({
   return (
     <html lang="es" className={montserrat.variable}>
       <body className="antialiased">
-        <LoadingScreen />
-        <Header />
-        {children}
-        <Toast />
+        <LenisProvider>
+          <LoadingScreen />
+          <Header />
+          <main className="main-content">
+            {children}
+          </main>
+          <Toast />
+
+        </LenisProvider>
       </body>
     </html>
   );

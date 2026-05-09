@@ -4,8 +4,6 @@
 .page {
     background-color: var(--color-dark);
     min-height: 100vh;
-    padding-top: 76px;
-    /* altura del header fijo */
 }
 
 /* ── Encabezado Principal ── */
