@@ -69,7 +69,7 @@
    BODY
 ══════════════════════════════════════════ */
 body {
-  background: var(--background);
+  background: var(--color-dark);
   color: var(--foreground);
   font-family: var(--font-main);
   font-size: var(--text-body);
