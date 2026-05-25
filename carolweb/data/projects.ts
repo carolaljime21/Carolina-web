@@ -104,4 +104,18 @@ export const projectsData: ProjectData[] = [
         ],
         gallery: [],
     },
+
+    {
+        id: 'myKumo',
+        title: 'My Kumo',
+        subtitle: 'Web Meterológica con Avatar 3D',
+        description:
+            'My Kumo es un dashboard del clima con diseño glassmorphism y actualizaciones en tiempo real. Incluye detección de ubicación inteligente, fondos dinámicos según el estado del clima y un avatar 3D integrado con animaciones fluidas. Llamado de APIs para datos meteorológicos, geolocalización y banderas de países.',
+        extendedDescription:
+            '',
+        href: 'https://my-kumo.vercel.app/',
+        technologies: ['react', 'three.js', 'GSAP', 'open-meteo', 'flags-api', 'lenis'],
+        keyFeatures: [],
+        gallery: [],
+    },
 ];
